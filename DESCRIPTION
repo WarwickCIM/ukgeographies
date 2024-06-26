@@ -1,9 +1,9 @@
 Package: ukgeographies
-Title: What the Package Does (One Line, Title Case)
+Title: Downloads UK Geographies From ONS' Geoportal 
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Carlos", "Cámara-Menoyo", , "carlos.camara@warwick.ac.uk", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-9378-0549"))
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
