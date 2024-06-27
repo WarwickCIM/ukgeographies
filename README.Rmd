@@ -1,0 +1,57 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# UKgeogRaphies
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+This is still a WIP.
+
+The goal of UKgeogRaphies is to retrieve geospatial data from ONS' Geoportal and
+make it usable within R.
+
+So far it provides very limited functionality to download boundaries in the UK
+and convert them to `sf` objects.
+
+## Installation
+
+You can install the development version of ukgeographies from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("WarwickCIM/ukgeographies")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(ukgeographies)
+## basic example code
+
+countries_2022 <- get_boundaries("countries", 2022, "BUC")
+
+class(countries_2022)
+
+countries_2022
+
+plot(countries_2022["CTRY22NM"])
+
+```
+
+
+You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
