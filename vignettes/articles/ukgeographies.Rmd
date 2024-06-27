@@ -38,7 +38,7 @@ Clipping / Resolution:
 -   BGC: Generalised (20m) - clipped to the coastline (Mean High Water mark)
 -   BUC: Ultra Generalised (500m) - clipped to the coastline (Mean High Water mark)
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 path <- paste0("https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/",
                object, 
                "_",
