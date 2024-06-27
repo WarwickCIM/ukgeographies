@@ -9,6 +9,14 @@ License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 URL: https://github.com/WarwickCIM/ukgeographies
 BugReports: https://github.com/WarwickCIM/ukgeographies/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Imports: 
+    sf
+Depends: 
+    R (>= 2.10)

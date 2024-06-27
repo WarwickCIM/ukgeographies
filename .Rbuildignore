@@ -1,2 +1,4 @@
 ^ukgeographies\.Rproj$
 ^\.Rproj\.user$
+^data-raw$
+^vignettes/articles$
