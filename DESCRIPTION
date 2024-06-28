@@ -14,7 +14,9 @@ URL: https://github.com/WarwickCIM/ukgeographies, https://warwickcim.github.io/u
 BugReports: https://github.com/WarwickCIM/ukgeographies/issues
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    rvest,
+    stringr
 VignetteBuilder: knitr
 Imports: 
     sf

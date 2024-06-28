@@ -4,19 +4,39 @@
 \alias{get_boundaries}
 \title{Retrieve Geographical Boundary}
 \usage{
-get_boundaries(boundary, year, resolution = "BUC")
+get_boundaries(boundary, year, detail_level = "BUC")
 }
 \arguments{
-\item{boundary}{a string containing...}
+\item{boundary}{a string containing ... Accepted values are:
+CAUTH, CED, CTRY, CTY, CTYUA, LAD, LPA, LSOA, MCTY, MSOA, OA, PAR, PARNCP, RGN, UTLA, WD}
 
 \item{year}{a number containing...}
 
-\item{resolution}{a string containing...}
+\item{detail_level}{a string defining the level of detail in the geometry.
+Accepted values are: BFC, BFE, BGC, BUC. Each value
+corresponds to:
+\itemize{
+\item Full Extent (BFE) – Full resolution boundaries go to the Extent of the Realm (Low Water Mark) and are the most detailed of the boundaries.
+\item Full Clipped (BFC) – Full resolution boundaries that are clipped to the coastline (Mean High Water mark).
+\item Generalised Clipped (BGC) - Generalised to 20m and clipped to the coastline (Mean High Water mark) and more generalised than the BFE boundaries.
+\item Super Generalised Clipped (BSC) (200m) – Generalised to 200m and clipped to the coastline (Mean High Water mark).
+\item Ultra Generalised Clipped (BUC) (500m) – Generalised to 500m and clipped to the coastline (Mean High Water mark).
+\item Grid, Extent (BGE) - Grid formed of equally sized cells which extend beyond the coastline.
+\item Generalised, Grid (BGG) - Generalised 50m grid squares.
+}
+
+For a detailed description of the methodology refer to \href{https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries}{Digital boundaries}}
 }
 \value{
-a sf object
+a sf object with the selected boundaries
 }
 \description{
 Queries \href{https://geoportal.statistics.gov.uk/}{ONS' Geoportal} endpoints and
 retrieves the requested geographical boundaries in the form of a sf object.
+}
+\examples{
+CA_2023_BGC <- get_boundaries("Combined Authorities", 2023, "BGC")
+
+class(CA_2023_BGC)
+
 }
