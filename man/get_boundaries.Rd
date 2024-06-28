@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_boundaries.R
 \name{get_boundaries}
 \alias{get_boundaries}
-\title{Retrieve Geographical Boundary}
+\title{Retrieve Geographical Boundaries}
 \usage{
 get_boundaries(boundary, year, detail_level = "BUC")
 }
@@ -35,7 +35,7 @@ Queries \href{https://geoportal.statistics.gov.uk/}{ONS' Geoportal} endpoints an
 retrieves the requested geographical boundaries in the form of a sf object.
 }
 \examples{
-CA_2023_BGC <- get_boundaries("Combined Authorities", 2023, "BGC")
+CA_2023_BGC <- get_boundaries("CAUTH", 2023, "BGC")
 
 class(CA_2023_BGC)
 

@@ -1,4 +1,4 @@
-#' Retrieve Geographical Boundary
+#' Retrieve Geographical Boundaries
 #'
 #' Queries [ONS' Geoportal](https://geoportal.statistics.gov.uk/) endpoints and
 #' retrieves the requested geographical boundaries in the form of a sf object.
@@ -27,17 +27,17 @@
 #' @export
 #'
 #' @examples
-#' CA_2023_BGC <- get_boundaries("Combined Authorities", 2023, "BGC")
+#' CA_2023_BGC <- get_boundaries("CAUTH", 2023, "BGC")
 #'
 #' class(CA_2023_BGC)
 #'
 get_boundaries <- function(boundary, year, detail_level="BUC"){
-  # TODO Check that boundary is not empty and is a string
+  # TODO Check that boundary is not empty and is a string and is one of the possible values in data_urls$boundary
   # TODO Check that year is not empty and is a number
   # TODO if there's no combination of boundary and year, assign the closer
   # number (floor) and print a message stating the assumption.
 
-  lookup <- paste(boundary, year, resolution, sep = "_")
+  lookup <- paste(boundary, year, detail_level, sep = "_")
 
   url <- data_urls$url_download[data_urls$id == lookup]
 
