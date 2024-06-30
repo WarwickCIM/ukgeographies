@@ -4,10 +4,10 @@
 #' retrieves the requested geographical boundaries in the form of a sf object.
 #'
 #' @param boundary a string containing ... Accepted values are:
-#'  `r levels(data_urls$boundary)`
+#'  `r levels(ons_boundaries$boundary)`
 #' @param year a number containing...
 #' @param detail_level a string defining the level of detail in the geometry.
-#'  Accepted values are: `r levels(data_urls$resolution)`. Each value
+#'  Accepted values are: `r levels(ons_boundaries$detail_level)`. Each value
 #'  corresponds to:
 #'
 #'   - Full Extent (BFE) – Full resolution boundaries go to the Extent of the Realm (Low Water Mark) and are the most detailed of the boundaries.
@@ -44,11 +44,11 @@ boundaries_get <- function(boundary, year = NULL, detail_level = "BUC") {
       class = "error_not_single_string"
     )
   }
-  if (!boundary %in% levels(data_urls$boundary)) {
+  if (!boundary %in% levels(ons_boundaries$boundary)) {
     cli::cli_abort(
       paste(
         "`boundary` must be one of these values:",
-        levels(data_urls$boundary)
+        levels(ons_boundaries$boundary)
       ),
       class = "error_boundary_not_valid"
     )
@@ -70,7 +70,7 @@ boundaries_get <- function(boundary, year = NULL, detail_level = "BUC") {
 
   lookup <- paste(boundary, year, detail_level, sep = "_")
 
-  url <- data_urls$url_download[data_urls$id == lookup]
+  url <- ons_boundaries$url_download[ons_boundaries$id == lookup]
 
   if (length(url) == 0) {
     cli::cli_abort(

@@ -23,33 +23,31 @@ services <- ons_geoportal |>
 
 # Build the dataframe -----------------------------------------------------
 
-data_urls <- as.data.frame(services) |>
+ons_data <- as.data.frame(services) |>
+  rename(service = services) |>
   # Remove Mapserver
-  filter(str_detect(services, "/FeatureServer")) |>
+  filter(str_detect(service, "/FeatureServer")) |>
   # Convert absolute URLS
-  mutate(services = paste0(geoportal_base_url, services)) |>
-  mutate(type = case_when(
-    str_detect(services, "Lookup") ~ "Lookup",
-  )) |>
+  mutate(service = paste0(geoportal_base_url, service)) |>
   # Infer categories from titles
   mutate(
     boundary = case_when(
-      str_detect(services, "Combined_Authorities") ~ "CAUTH",
-      str_detect(services, "/Counties_and_Unitary_Authorities") ~ "CTYUA",
-      str_detect(services, "/Counties_") ~ "CTY",
-      str_detect(services, "/Countries_") ~ "CTRY",
-      str_detect(services, "/County_Electoral_Division") ~ "CED",
-      str_detect(services, "/Local_Authority_Districts") ~ "LAD",
-      str_detect(services, "/Local_Planning_Authorities") ~ "LPA",
-      str_detect(services, "/Metropolitan_Counties") ~ "MCTY",
-      str_detect(services, "/Parishes_and_Non_Civil_Parished_Areas") ~ "PARNCP",
-      str_detect(services, "/Parishes") ~ "PAR",
-      str_detect(services, "/Regions") ~ "RGN",
-      str_detect(services, "/Upper_Tier") ~ "UTLA",
-      str_detect(services, "/Wards") ~ "WD",
-      str_detect(services, "/Lower_Layer") ~ "LSOA",
-      str_detect(services, "/Middle_Layer") ~ "MSOA",
-      str_detect(services, "/Output_Areas") ~ "OA",
+      str_detect(service, "Combined_Authorities") ~ "CAUTH",
+      str_detect(service, "/Counties_and_Unitary_Authorities") ~ "CTYUA",
+      str_detect(service, "/Counties_") ~ "CTY",
+      str_detect(service, "/Countries_") ~ "CTRY",
+      str_detect(service, "/County_Electoral_Division") ~ "CED",
+      str_detect(service, "/Local_Authority_Districts") ~ "LAD",
+      str_detect(service, "/Local_Planning_Authorities") ~ "LPA",
+      str_detect(service, "/Metropolitan_Counties") ~ "MCTY",
+      str_detect(service, "/Parishes_and_Non_Civil_Parished_Areas") ~ "PARNCP",
+      str_detect(service, "/Parishes") ~ "PAR",
+      str_detect(service, "/Regions") ~ "RGN",
+      str_detect(service, "/Upper_Tier") ~ "UTLA",
+      str_detect(service, "/Wards") ~ "WD",
+      str_detect(service, "/Lower_Layer") ~ "LSOA",
+      str_detect(service, "/Middle_Layer") ~ "MSOA",
+      str_detect(service, "/Output_Areas") ~ "OA",
     ),
     boundary = as.factor(boundary)
   ) |>
@@ -66,25 +64,33 @@ data_urls <- as.data.frame(services) |>
   ) |>
   relocate(boundary_type, .before = boundary) |>
   mutate(
-    resolution = case_when(
-      str_detect(services, "_BFC") ~ "BFC",
-      str_detect(services, "_BFE") ~ "BFE",
-      str_detect(services, "_BGC") ~ "BGC",
-      str_detect(services, "_BUC") ~ "BUC"
+    detail_level = case_when(
+      str_detect(service, "_BFC") ~ "BFC",
+      str_detect(service, "_BFE") ~ "BFE",
+      str_detect(service, "_BGC") ~ "BGC",
+      str_detect(service, "_BUC") ~ "BUC"
     ),
-    detail_level = as.factor(resolution)
+    detail_level = as.factor(detail_level)
   ) |>
   mutate(
-    year = str_extract(services, "_(19|20)(\\d){2}"),
+    year = str_extract(service, "_(19|20)(\\d){2}"),
     year = as.numeric(str_remove(year, "_"))
   ) |>
+  mutate(
+    type = case_when(
+      str_detect(service, "Lookup") ~ "Lookup",
+      !is.na(boundary) ~ "Boundary",
+    ),
+    type = as.factor(type)
+  )
+
+ons_boundaries <- ons_data |>
+  filter(type == "Boundary") |>
+  select(-type) |>
   # Create URL to query featureserver and return a geojson file.
-  mutate(url_download = paste0(services, "/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")) |>
-  #
-  # data_boundaries <- data_urls |>
-  #   filter(!is.na(boundary)) |>
+  mutate(url_download = paste0(service, "/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")) |>
   # Create unique id
   mutate(id = paste(boundary, year, detail_level, sep = "_")) |>
   relocate(id)
 
-usethis::use_data(data_urls, overwrite = TRUE, internal = TRUE)
+usethis::use_data(ons_boundaries, overwrite = TRUE)
