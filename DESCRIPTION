@@ -16,9 +16,14 @@ Suggests:
     knitr,
     rmarkdown,
     rvest,
-    stringr
+    stringr,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports: 
+    cli,
+    rlang,
     sf
 Depends: 
     R (>= 2.10)
+Config/testthat/edition: 3
+LazyData: true

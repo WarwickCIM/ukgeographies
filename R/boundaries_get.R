@@ -31,15 +31,57 @@
 #'
 #' class(CA_2023_BGC)
 #'
-boundaries_get <- function(boundary, year, detail_level = "BUC") {
-  # TODO Check that boundary is not empty and is a string and is one of the possible values in data_urls$boundary
-  # TODO Check that year is not empty and is a number
+boundaries_get <- function(boundary, year = NULL, detail_level = "BUC") {
+  # Check parameters --------------------------------------------------------
+
+  if (!rlang::is_character(boundary, n = 1)) {
+    cli::cli_abort(
+      c(
+        "{.var boundary} must be a single string.",
+        "x" = "You've supplied a {.cls {class(boundary)}} of length
+        {.cls {length(boundary)}}."
+      ),
+      class = "error_not_single_string"
+    )
+  }
+  if (!boundary %in% levels(data_urls$boundary)) {
+    cli::cli_abort(
+      paste(
+        "`boundary` must be one of these values:",
+        levels(data_urls$boundary)
+      ),
+      class = "error_boundary_not_valid"
+    )
+  }
+  if (!rlang::is_double(year, n = 1)) {
+    cli::cli_abort("`year` must be a single number",
+      class = "error_not_single_number"
+    )
+  }
+  if (!year %in% 1991:2024) {
+    cli::cli_abort("{.var year} must be a single number between 1991 and 2025",
+      class = "error_year_not_valid"
+    )
+  }
   # TODO if there's no combination of boundary and year, assign the closer
   # number (floor) and print a message stating the assumption.
+
+  # Download --------------------------------------------------------
 
   lookup <- paste(boundary, year, detail_level, sep = "_")
 
   url <- data_urls$url_download[data_urls$id == lookup]
+
+  if (length(url) == 0) {
+    cli::cli_abort(
+      c(
+        "ONS doesn't have any boundaries matching the input combination",
+        "i" = "You may want to use {.fn boundaries_select} to help you find a
+        valid boundary"
+      ),
+      class = "error_boundary_invalid_combination"
+    )
+  }
 
   spdf <- sf::read_sf(url)
 
