@@ -31,7 +31,7 @@
 #'
 #' class(CA_2023_BGC)
 #'
-get_boundaries <- function(boundary, year, detail_level="BUC"){
+get_boundaries <- function(boundary, year, detail_level = "BUC") {
   # TODO Check that boundary is not empty and is a string and is one of the possible values in data_urls$boundary
   # TODO Check that year is not empty and is a number
   # TODO if there's no combination of boundary and year, assign the closer

@@ -51,7 +51,6 @@ class(countries_2022)
 countries_2022
 
 plot(countries_2022["CTRY22NM"])
-
 ```
 
 
