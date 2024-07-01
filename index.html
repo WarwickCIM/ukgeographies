@@ -65,9 +65,16 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>This is still a WIP.</p>
-<p>The goal of UKgeogRaphies is to retrieve geospatial data from ONS’ Geoportal and make it usable within R.</p>
+<blockquote>
+<p>[!WARNING]<br>
+This package is highly experimental and is still a WIP. Expect uncomplete features, frequent breaks, lack of documentation and changes in the API.</p>
+</blockquote>
+<blockquote>
+<p>Because UK Geographies are complex enough<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;ONS has a&lt;/p&gt;"><sup>1</sup></a>, working with them should be easy enough.</p>
+</blockquote>
+<p>The goal of <code>{UKgeogRaphies}</code> is to provide an interface to easily retrieve geospatial data from ONS’ Geoportal and make it usable within R.</p>
 <p>So far it provides very limited functionality to download boundaries in the UK and convert them to <code>sf</code> objects.</p>
+<p><strong>Acknowledgement</strong>: this packages is highly inspired (feature wise) by <a href="https://l-hodge.github.io/ukgeog/" class="external-link"><code>{UKgeog}</code></a>, which ceased to work after ONS changed their API and has not been maintained since 2022.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -82,35 +89,44 @@
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/WarwickCIM/ukgeographies" class="external-link">ukgeographies</a></span><span class="op">)</span></span>
-<span><span class="co">## basic example code</span></span>
 <span></span>
-<span><span class="va">countries_2022</span> <span class="op">&lt;-</span> <span class="fu">get_boundaries</span><span class="op">(</span><span class="st">"countries"</span>, <span class="fl">2022</span>, <span class="st">"BUC"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">countries_2022</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "sf"         "tbl_df"     "tbl"        "data.frame"</span></span></code></pre></div>
+<span><span class="co"># Get a sf object from </span></span>
+<span><span class="va">countries_2023</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/boundaries_get.html">boundaries_get</a></span><span class="op">(</span><span class="st">"CTRY"</span>, <span class="fl">2023</span>, <span class="st">"BUC"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in CPL_read_ogr(dsn, layer, query, as.character(options), quiet, : GDAL</span></span>
+<span><span class="co">#&gt; Message 1: organizePolygons() received a polygon with more than 100 parts. The</span></span>
+<span><span class="co">#&gt; processing may be really slow.  You can skip the processing by setting</span></span>
+<span><span class="co">#&gt; METHOD=SKIP, or only make it analyze counter-clock wise parts by setting</span></span>
+<span><span class="co">#&gt; METHOD=ONLY_CCW if you can assume that the outline of holes is counter-clock</span></span>
+<span><span class="co">#&gt; wise defined</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">countries_2022</span></span>
-<span><span class="co">#&gt; Simple feature collection with 3 features and 11 fields</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "sf"         "tbl_df"     "tbl"        "data.frame"</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">countries_2023</span></span>
+<span><span class="co">#&gt; Simple feature collection with 4 features and 11 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
 <span><span class="co">#&gt; Bounding box:  xmin: -8.649996 ymin: 49.88234 xmax: 1.763706 ymax: 60.86087</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span><span class="co">#&gt; # A tibble: 3 × 12</span></span>
-<span><span class="co">#&gt;     FID CTRY22CD  CTRY22NM CTRY22NMW  BNG_E  BNG_N  LONG   LAT   Shape__Area</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;      &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     1 E92000001 England  Lloegr    394883 370883 -2.08  53.2 130608597662.</span></span>
-<span><span class="co">#&gt; 2     2 S92000003 Scotland Yr Alban  277744 700060 -3.97  56.2  78610512179.</span></span>
-<span><span class="co">#&gt; 3     3 W92000004 Wales    Cymru     263405 242881 -3.99  52.1  20792550547.</span></span>
+<span><span class="co">#&gt; # A tibble: 4 × 12</span></span>
+<span><span class="co">#&gt;     FID CTRY23CD  CTRY23NM       CTRY23NMW  BNG_E  BNG_N LONG  LAT   Shape__Area</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1     1 E92000001 England        Lloegr    394883 370883 -2.0… 53.2…     1.31e11</span></span>
+<span><span class="co">#&gt; 2     2 N92000002 Northern Irel… Gogledd …  86544 535337 -6.8… 54.6…     1.43e10</span></span>
+<span><span class="co">#&gt; 3     3 S92000003 Scotland       Yr Alban  277744 700060 -3.9… 56.1…     7.86e10</span></span>
+<span><span class="co">#&gt; 4     4 W92000004 Wales          Cymru     263405 242881 -3.9… 52.0…     2.08e10</span></span>
 <span><span class="co">#&gt; # ℹ 3 more variables: Shape__Length &lt;dbl&gt;, GlobalID &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [°]&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">countries_2022</span><span class="op">[</span><span class="st">"CTRY22NM"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">[</span><span class="st">"CTRY23NM"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
-<p>You’ll still need to render <code>README.Rmd</code> regularly, to keep <code>README.md</code> up-to-date. <code>devtools::build_readme()</code> is handy for this.</p>
 </div>
 </div>
+
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
