@@ -1,9 +1,8 @@
 ---
 output: github_document
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
+<!-- README.md is generated from README.Rmd. Please edit that file and run
+`devtools::build_readme()` -->
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -12,24 +11,34 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
 # UKgeogRaphies
-
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/WarwickCIM/ukgeographies/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/WarwickCIM/ukgeographies/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-This is still a WIP.
+> [!WARNING]  
+> This package is highly experimental and is still a WIP. Expect uncomplete 
+> features, frequent breaks, lack of documentation and changes in the API.
 
-The goal of UKgeogRaphies is to retrieve geospatial data from ONS' Geoportal and
-make it usable within R.
+
+> Because UK Geographies are complex enough[^complex], working with them should be easy
+enough.
+
+The goal of `{UKgeogRaphies}` is to provide an interface to easily retrieve
+geospatial data from ONS' Geoportal and make it usable within R. 
 
 So far it provides very limited functionality to download boundaries in the UK
 and convert them to `sf` objects.
 
+**Acknowledgement**: this packages is highly inspired (feature wise) by 
+[`{UKgeog}`](https://l-hodge.github.io/ukgeog/), which ceased to work after ONS 
+changed their API and has not been maintained since 2022.
+
+
 ## Installation
 
-You can install the development version of ukgeographies from [GitHub](https://github.com/) with:
+You can install the development version of ukgeographies from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -42,16 +51,15 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(ukgeographies)
-## basic example code
 
-countries_2022 <- get_boundaries("countries", 2022, "BUC")
+# Get a sf object from 
+countries_2023 <- boundaries_get("CTRY", 2023, "BUC")
 
-class(countries_2022)
+class(countries_2023)
 
-countries_2022
+countries_2023
 
-plot(countries_2022["CTRY22NM"])
+plot(countries_2023["CTRY23NM"])
 ```
 
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+[^complex]: ONS has a 

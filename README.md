@@ -1,5 +1,6 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.Rmd. Please edit that file and run
+`devtools::build_readme()` -->
 
 # UKgeogRaphies
 
@@ -8,13 +9,24 @@
 [![R-CMD-check](https://github.com/WarwickCIM/ukgeographies/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/WarwickCIM/ukgeographies/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-This is still a WIP.
+> \[!WARNING\]  
+> This package is highly experimental and is still a WIP. Expect
+> uncomplete features, frequent breaks, lack of documentation and
+> changes in the API.
 
-The goal of UKgeogRaphies is to retrieve geospatial data from ONS’
-Geoportal and make it usable within R.
+> Because UK Geographies are complex enough[^1], working with them
+> should be easy enough.
+
+The goal of `{UKgeogRaphies}` is to provide an interface to easily
+retrieve geospatial data from ONS’ Geoportal and make it usable within
+R.
 
 So far it provides very limited functionality to download boundaries in
 the UK and convert them to `sf` objects.
+
+**Acknowledgement**: this packages is highly inspired (feature wise) by
+[`{UKgeog}`](https://l-hodge.github.io/ukgeog/), which ceased to work
+after ONS changed their API and has not been maintained since 2022.
 
 ## Installation
 
@@ -32,38 +44,47 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(ukgeographies)
-## basic example code
 
-countries_2022 <- get_boundaries("countries", 2022, "BUC")
+# Get a sf object from 
+countries_2023 <- boundaries_get("CTRY", 2023, "BUC")
+#> Warning in CPL_read_ogr(dsn, layer, query, as.character(options), quiet, : GDAL
+#> Message 1: organizePolygons() received a polygon with more than 100 parts. The
+#> processing may be really slow.  You can skip the processing by setting
+#> METHOD=SKIP, or only make it analyze counter-clock wise parts by setting
+#> METHOD=ONLY_CCW if you can assume that the outline of holes is counter-clock
+#> wise defined
+```
 
-class(countries_2022)
+``` r
+
+class(countries_2023)
 #> [1] "sf"         "tbl_df"     "tbl"        "data.frame"
 ```
 
 ``` r
 
-countries_2022
-#> Simple feature collection with 3 features and 11 fields
+countries_2023
+#> Simple feature collection with 4 features and 11 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
 #> Bounding box:  xmin: -8.649996 ymin: 49.88234 xmax: 1.763706 ymax: 60.86087
 #> Geodetic CRS:  WGS 84
-#> # A tibble: 3 × 12
-#>     FID CTRY22CD  CTRY22NM CTRY22NMW  BNG_E  BNG_N  LONG   LAT   Shape__Area
-#>   <int> <chr>     <chr>    <chr>      <int>  <int> <dbl> <dbl>         <dbl>
-#> 1     1 E92000001 England  Lloegr    394883 370883 -2.08  53.2 130608597662.
-#> 2     2 S92000003 Scotland Yr Alban  277744 700060 -3.97  56.2  78610512179.
-#> 3     3 W92000004 Wales    Cymru     263405 242881 -3.99  52.1  20792550547.
+#> # A tibble: 4 × 12
+#>     FID CTRY23CD  CTRY23NM       CTRY23NMW  BNG_E  BNG_N LONG  LAT   Shape__Area
+#>   <int> <chr>     <chr>          <chr>      <int>  <int> <chr> <chr>       <dbl>
+#> 1     1 E92000001 England        Lloegr    394883 370883 -2.0… 53.2…     1.31e11
+#> 2     2 N92000002 Northern Irel… Gogledd …  86544 535337 -6.8… 54.6…     1.43e10
+#> 3     3 S92000003 Scotland       Yr Alban  277744 700060 -3.9… 56.1…     7.86e10
+#> 4     4 W92000004 Wales          Cymru     263405 242881 -3.9… 52.0…     2.08e10
 #> # ℹ 3 more variables: Shape__Length <dbl>, GlobalID <chr>,
 #> #   geometry <MULTIPOLYGON [°]>
 ```
 
 ``` r
 
-plot(countries_2022["CTRY22NM"])
+plot(countries_2023["CTRY23NM"])
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+[^1]: ONS has a
