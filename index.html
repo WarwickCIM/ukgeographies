@@ -70,8 +70,7 @@
 This package is highly experimental and is still a WIP. Expect uncomplete features, frequent breaks, lack of documentation and changes in the API.</p>
 </blockquote>
 <blockquote>
-<h3 id="because-uk-geographies-are-complex-enough1-working-with-them">Because UK Geographies are complex enough<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;To get you started, ONS has edited a &lt;a href="https://geoportal.statistics.gov.uk/datasets/c0db0e8c67d04935bcf1749ca6027fef/about" class="external-link"&gt;A Beginner’s Guide to UK Geography&lt;/a&gt; which &lt;em&gt;only&lt;/em&gt; has 137 pages.&lt;/p&gt;'><sup>1</sup></a>, working with them</h3>
-<h3 id="should-be-easy-enough">should be easy enough.</h3>
+<h3 id="because-uk-geographies-are-complex-enough1-working-with-them-should-be-easy-enough">Because UK Geographies are complex enough<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;To get you started, ONS has edited a &lt;a href="https://geoportal.statistics.gov.uk/datasets/c0db0e8c67d04935bcf1749ca6027fef/about" class="external-link"&gt;A Beginner’s Guide to UK Geography&lt;/a&gt; which &lt;em&gt;only&lt;/em&gt; has 137 pages.&lt;/p&gt;'><sup>1</sup></a>, working with them should be easy enough.</h3>
 </blockquote>
 <p>The goal of <code>{UKgeogRaphies}</code> is to provide an interface to easily retrieve geospatial data from ONS’ Geoportal and make it usable within R.</p>
 <p>So far it provides very limited functionality to download boundaries in the UK and convert them to <code>sf</code> objects.</p>
@@ -124,6 +123,184 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">[</span><span class="st">"CTRY23NM"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="boundaries">Boundaries<a class="anchor" aria-label="anchor" href="#boundaries"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="3%">
+<col width="16%">
+<col width="20%">
+<col width="14%">
+<col width="14%">
+<col width="26%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">boundary_type</th>
+<th align="left">boundary</th>
+<th align="left">BFC</th>
+<th align="left">BFE</th>
+<th align="left">BGC</th>
+<th align="left">BUC</th>
+<th align="left">NA</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">CAUTH</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2016; 2017; 2018; 2019; 2020; 2023</td>
+</tr>
+<tr class="even">
+<td align="left">Administrative</td>
+<td align="left">CED</td>
+<td align="left">2023</td>
+<td align="left">2023</td>
+<td align="left">2023</td>
+<td align="left">2023</td>
+<td align="left">2017; 2018; 2019; 2020</td>
+</tr>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">CTRY</td>
+<td align="left">1961; 2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2011; 2016; 2017; 2018; 2019; 2020; 2023</td>
+</tr>
+<tr class="even">
+<td align="left">Administrative</td>
+<td align="left">CTY</td>
+<td align="left">1961; 2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">1991; 2015; 2016; 2017; 2018; 2019; 2020; 2021; 2023</td>
+</tr>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">CTYUA</td>
+<td align="left">2017; 2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2017; 2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2017; 2021; 2022; 2023</td>
+<td align="left">2011; 2017; 2018; 2019; 2023</td>
+</tr>
+<tr class="even">
+<td align="left">Administrative</td>
+<td align="left">LAD</td>
+<td align="left">2008; 2011; 2016; 2017; 2019; 2021; 2022; 2023</td>
+<td align="left">2008; 2011; 2012; 2013; 2014; 2016; 2019; 2021; 2022; 2023</td>
+<td align="left">2008; 2011; 2017; 2019; 2021; 2022; 2023</td>
+<td align="left">2016; 2017; 2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2011; 2016; 2017; 2018; 2019; 2022; 2023</td>
+</tr>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">LPA</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021</td>
+</tr>
+<tr class="even">
+<td align="left">Administrative</td>
+<td align="left">MCTY</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">2016; 2017; 2018; 2019; 2020</td>
+</tr>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">PAR</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2020</td>
+<td align="left">2011; 2015; 2016; 2017; 2018; 2019; 2020; 2021; 2022; 2023</td>
+</tr>
+<tr class="even">
+<td align="left">Administrative</td>
+<td align="left">PARNCP</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2020; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">NA</td>
+<td align="left">2018; 2019; 2020; 2021; 2022; 2023</td>
+</tr>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">RGN</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2015; 2016; 2017; 2018; 2019; 2020; 2023</td>
+</tr>
+<tr class="even">
+<td align="left">Administrative</td>
+<td align="left">UTLA</td>
+<td align="left">2022</td>
+<td align="left">2022</td>
+<td align="left">2022</td>
+<td align="left">2022</td>
+<td align="left">2022</td>
+</tr>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">WD</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">1998; 2016; 2019; 2020; 2021; 2022; 2023; 2024</td>
+<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">NA</td>
+<td align="left">1991; 1998; 2011; 2015; 2016; 2017; 2018; 2019; 2020; 2021; 2022; 2023; 2024</td>
+</tr>
+<tr class="even">
+<td align="left">Census Boundaries</td>
+<td align="left">LSOA</td>
+<td align="left">NA</td>
+<td align="left">2011</td>
+<td align="left">2001</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Census Boundaries</td>
+<td align="left">MSOA</td>
+<td align="left">NA</td>
+<td align="left">2001; 2011</td>
+<td align="left">2001</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Census Boundaries</td>
+<td align="left">OA</td>
+<td align="left">2001; 2011; 2021</td>
+<td align="left">2001; 2021</td>
+<td align="left">2001; 2011; 2021</td>
+<td align="left">NA</td>
+<td align="left">2001; 2011; 2021</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
