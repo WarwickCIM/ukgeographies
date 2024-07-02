@@ -17,9 +17,7 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 > uncomplete features, frequent breaks, lack of documentation and
 > changes in the API.
 
-> ### Because UK Geographies are complex enough[^1], working with them
->
-> ### should be easy enough.
+> ### Because UK Geographies are complex enough[^1], working with them should be easy enough.
 
 The goal of `{UKgeogRaphies}` is to provide an interface to easily
 retrieve geospatial data from ONS’ Geoportal and make it usable within
@@ -90,6 +88,36 @@ plot(countries_2023["CTRY23NM"])
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
+
+## Boundaries
+
+    #> 
+    #> Attaching package: 'dplyr'
+    #> The following objects are masked from 'package:stats':
+    #> 
+    #>     filter, lag
+    #> The following objects are masked from 'package:base':
+    #> 
+    #>     intersect, setdiff, setequal, union
+
+| boundary_type     | boundary | BFC                                            | BFE                                                        | BGC                                      | BUC                                      | NA                                                                           |
+|:------------------|:---------|:-----------------------------------------------|:-----------------------------------------------------------|:-----------------------------------------|:-----------------------------------------|:-----------------------------------------------------------------------------|
+| Administrative    | CAUTH    | 2020; 2021; 2022; 2023                         | 2020; 2021; 2022; 2023                                     | 2021; 2022; 2023                         | 2020; 2021; 2022; 2023                   | 2016; 2017; 2018; 2019; 2020; 2023                                           |
+| Administrative    | CED      | 2023                                           | 2023                                                       | 2023                                     | 2023                                     | 2017; 2018; 2019; 2020                                                       |
+| Administrative    | CTRY     | 1961; 2016; 2020; 2021; 2022; 2023             | 2016; 2020; 2021; 2022; 2023                               | 2016; 2020; 2021; 2022; 2023             | 2016; 2020; 2021; 2022; 2023             | 2011; 2016; 2017; 2018; 2019; 2020; 2023                                     |
+| Administrative    | CTY      | 1961; 2020; 2021; 2022; 2023                   | 2019; 2020; 2021; 2022; 2023                               | 2020; 2021; 2022; 2023                   | 2020; 2021; 2022; 2023                   | 1991; 2015; 2016; 2017; 2018; 2019; 2020; 2021; 2023                         |
+| Administrative    | CTYUA    | 2017; 2019; 2020; 2021; 2022; 2023             | 2017; 2021; 2022; 2023                                     | 2020; 2021; 2022; 2023                   | 2017; 2021; 2022; 2023                   | 2011; 2017; 2018; 2019; 2023                                                 |
+| Administrative    | LAD      | 2008; 2011; 2016; 2017; 2019; 2021; 2022; 2023 | 2008; 2011; 2012; 2013; 2014; 2016; 2019; 2021; 2022; 2023 | 2008; 2011; 2017; 2019; 2021; 2022; 2023 | 2016; 2017; 2019; 2020; 2021; 2022; 2023 | 2011; 2016; 2017; 2018; 2019; 2022; 2023                                     |
+| Administrative    | LPA      | 2019; 2020; 2021; 2022; 2023                   | 2019; 2020; 2021; 2022; 2023                               | 2019; 2020; 2021; 2022; 2023             | 2019; 2020; 2021; 2022; 2023             | 2019; 2020; 2021                                                             |
+| Administrative    | MCTY     | NA                                             | NA                                                         | NA                                       | NA                                       | 2016; 2017; 2018; 2019; 2020                                                 |
+| Administrative    | PAR      | 2020; 2021; 2022; 2023                         | 2019; 2020; 2021; 2022; 2023                               | 2020; 2021; 2022; 2023                   | 2020                                     | 2011; 2015; 2016; 2017; 2018; 2019; 2020; 2021; 2022; 2023                   |
+| Administrative    | PARNCP   | 2020; 2021; 2022; 2023                         | 2020; 2022; 2023                                           | 2020; 2021; 2022; 2023                   | NA                                       | 2018; 2019; 2020; 2021; 2022; 2023                                           |
+| Administrative    | RGN      | 2020; 2021; 2022; 2023                         | 2020; 2021; 2022; 2023                                     | 2020; 2021; 2022; 2023                   | 2019; 2020; 2021; 2022; 2023             | 2015; 2016; 2017; 2018; 2019; 2020; 2023                                     |
+| Administrative    | UTLA     | 2022                                           | 2022                                                       | 2022                                     | 2022                                     | 2022                                                                         |
+| Administrative    | WD       | 2019; 2020; 2021; 2022; 2023                   | 1998; 2016; 2019; 2020; 2021; 2022; 2023; 2024             | 2019; 2020; 2021; 2022; 2023             | NA                                       | 1991; 1998; 2011; 2015; 2016; 2017; 2018; 2019; 2020; 2021; 2022; 2023; 2024 |
+| Census Boundaries | LSOA     | NA                                             | 2011                                                       | 2001                                     | NA                                       | NA                                                                           |
+| Census Boundaries | MSOA     | NA                                             | 2001; 2011                                                 | 2001                                     | NA                                       | NA                                                                           |
+| Census Boundaries | OA       | 2001; 2011; 2021                               | 2001; 2021                                                 | 2001; 2011; 2021                         | NA                                       | 2001; 2011; 2021                                                             |
 
 [^1]: To get you started, ONS has edited a [A Beginner’s Guide to UK
     Geography](https://geoportal.statistics.gov.uk/datasets/c0db0e8c67d04935bcf1749ca6027fef/about)

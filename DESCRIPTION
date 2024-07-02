@@ -18,7 +18,8 @@ Suggests:
     rlang,
     rvest,
     stringr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tidyr
 VignetteBuilder: knitr
 Imports: 
     sf
