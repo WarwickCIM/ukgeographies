@@ -14,7 +14,8 @@
 > uncomplete features, frequent breaks, lack of documentation and
 > changes in the API.
 
-> Because UK Geographies are complex enough[^1], working with them
+> ### Because UK Geographies are complex enough[^1], working with them
+>
 > should be easy enough.
 
 The goal of `{UKgeogRaphies}` is to provide an interface to easily
@@ -87,4 +88,6 @@ plot(countries_2023["CTRY23NM"])
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
-[^1]: ONS has a
+[^1]: To get started, ONS has edited a [A Beginner’s Guide to UK
+    Geography](https://geoportal.statistics.gov.uk/datasets/c0db0e8c67d04935bcf1749ca6027fef/about)
+    which *only* has 137 pages.

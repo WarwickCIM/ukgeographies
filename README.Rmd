@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
 > features, frequent breaks, lack of documentation and changes in the API.
 
 
-> Because UK Geographies are complex enough[^complex], working with them should be easy
-enough.
+> ### Because UK Geographies are complex enough[^complex], working with them
+should be easy enough.
 
 The goal of `{UKgeogRaphies}` is to provide an interface to easily retrieve
 geospatial data from ONS' Geoportal and make it usable within R. 
@@ -62,4 +62,4 @@ countries_2023
 plot(countries_2023["CTRY23NM"])
 ```
 
-[^complex]: ONS has a 
+[^complex]: To get started, ONS has edited a [A Beginner’s Guide to UK Geography](https://geoportal.statistics.gov.uk/datasets/c0db0e8c67d04935bcf1749ca6027fef/about) which _only_ has 137 pages.
