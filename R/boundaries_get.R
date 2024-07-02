@@ -3,26 +3,28 @@
 #' Queries [ONS' Geoportal](https://geoportal.statistics.gov.uk/) endpoints and
 #' retrieves the requested geographical boundaries in the form of a sf object.
 #'
-#' @param boundary a string containing ... Accepted values are:
-#'  `r levels(ons_boundaries$boundary)`
-#' @param year a number containing...
+#' @param boundary a string containing the name of the boundary to be
+#' downloaded. Accepted values are: `r levels(ons_boundaries$boundary)`
+#' @param year a number containing the year when the boundary was created.
 #' @param detail_level a string defining the level of detail in the geometry.
+#' (this affects the download size).
 #'  Accepted values are: `r levels(ons_boundaries$detail_level)`. Each value
 #'  corresponds to:
 #'
-#'   - Full Extent (BFE) – Full resolution boundaries go to the Extent of the Realm (Low Water Mark) and are the most detailed of the boundaries.
-#'   - Full Clipped (BFC) – Full resolution boundaries that are clipped to the coastline (Mean High Water mark).
-#'   - Generalised Clipped (BGC) - Generalised to 20m and clipped to the coastline (Mean High Water mark) and more generalised than the BFE boundaries.
-#'   - Super Generalised Clipped (BSC) (200m) – Generalised to 200m and clipped to the coastline (Mean High Water mark).
-#'   - Ultra Generalised Clipped (BUC) (500m) – Generalised to 500m and clipped to the coastline (Mean High Water mark).
-#'   - Grid, Extent (BGE) - Grid formed of equally sized cells which extend beyond the coastline.
-#'   - Generalised, Grid (BGG) - Generalised 50m grid squares.
+#'   - _Full Extent (BFE)_ – Full resolution boundaries go to the Extent of the Realm (Low Water Mark) and are the most detailed of the boundaries.
+#'   - _Full Clipped (BFC)_ – Full resolution boundaries that are clipped to the coastline (Mean High Water mark).
+#'   - _Generalised Clipped (BGC)_ - Generalised to 20m and clipped to the coastline (Mean High Water mark) and more generalised than the BFE boundaries.
+#'   - _Super Generalised Clipped (BSC) (200m)_ – Generalised to 200m and clipped to the coastline (Mean High Water mark).
+#'   - _Ultra Generalised Clipped (BUC) (500m)_ – Generalised to 500m and clipped to the coastline (Mean High Water mark).
+#'   - _Grid, Extent (BGE)_ - Grid formed of equally sized cells which extend beyond the coastline.
+#'   - _Generalised, Grid (BGG)_ - Generalised 50m grid squares.
 #'
-#'  For a detailed description of the methodology refer to [Digital boundaries](https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries)
+#'  For a detailed description of how these boundaries were created refer to
+#'  [Digital boundaries](https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries)
 #'
 #'
 #'
-#' @return a sf object with the selected boundaries
+#' @return a `sf` object with the selected boundaries.
 #'
 #' @export
 #'
@@ -83,9 +85,14 @@ boundaries_get <- function(boundary, year = NULL, detail_level = "BUC") {
     )
   }
 
+  cli::cli_progress_step("Querying ONS API")
+  cli::cli_progress_step("Downloading the selected dataset from ONS services",
+                         spinner = TRUE
+  )
+
   spdf <- sf::read_sf(url)
 
-  cli::cli_progress_step("Downloading data", spinner = TRUE)
+
 
   return(spdf)
 }
