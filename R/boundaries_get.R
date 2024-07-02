@@ -85,5 +85,7 @@ boundaries_get <- function(boundary, year = NULL, detail_level = "BUC") {
 
   spdf <- sf::read_sf(url)
 
+  cli::cli_progress_step("Downloading data", spinner = TRUE)
+
   return(spdf)
 }

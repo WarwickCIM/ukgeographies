@@ -4,7 +4,7 @@
 \alias{boundaries_get}
 \title{Retrieve Geographical Boundaries}
 \usage{
-boundaries_get(boundary, year = NULL, detail_level = "BUC")
+boundaries_get()
 }
 \arguments{
 \item{boundary}{a string containing ... Accepted values are:
