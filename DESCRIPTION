@@ -22,7 +22,8 @@ Suggests:
     tidyr
 VignetteBuilder: knitr
 Imports: 
-    sf
+    sf,
+    utils
 Depends: 
     R (>= 2.10)
 Config/testthat/edition: 3
