@@ -1,33 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/404.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/articles/ukgeographies.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/index.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/reference/boundaries_get.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://warwickcim.github.io/ukgeographies/reference/ons_boundaries.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://warwickcim.github.io/ukgeographies/404.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/LICENSE-text.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/LICENSE.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/articles/index.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/articles/ukgeographies.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/authors.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/index.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/reference/boundaries_get.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/reference/index.html</loc></url>
+<url><loc>https://warwickcim.github.io/ukgeographies/reference/ons_boundaries.html</loc></url>
 </urlset>
+
