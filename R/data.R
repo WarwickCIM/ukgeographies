@@ -1,4 +1,4 @@
-#' ONS Boundaries
+#' ONS Boundaries Metadata
 #'
 #' Metadata about a subset of the geographical boundaries from [ONS'
 #' geoportal](https://geoportal.statistics.gov.uk/) that can be downloaded by

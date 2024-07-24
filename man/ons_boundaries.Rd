@@ -3,7 +3,7 @@
 \docType{data}
 \name{ons_boundaries}
 \alias{ons_boundaries}
-\title{ONS Boundaries}
+\title{ONS Boundaries Metadata}
 \format{
 A data frame with 513 rows and 7
 columns:
