@@ -32,6 +32,27 @@ ons_data <- as.data.frame(services) |>
   # Infer categories from titles
   mutate(
     boundary = case_when(
+      str_detect(service, "Combined_Authorities") ~ "Combined Authorities",
+      str_detect(service, "/Counties_and_Unitary_Authorities") ~ "Counties and Unitary Authorities",
+      str_detect(service, "/Counties_") ~ "Counties",
+      str_detect(service, "/Countries_") ~ "Countries",
+      str_detect(service, "/County_Electoral_Division") ~ "County Electoral Division",
+      str_detect(service, "/Local_Authority_Districts") ~ "Local Authority Districts",
+      str_detect(service, "/Local_Planning_Authorities") ~ "Local Planning Authorities",
+      str_detect(service, "/Metropolitan_Counties") ~ "Metropolitan Counties",
+      str_detect(service, "/Parishes_and_Non_Civil_Parished_Areas") ~ "Parishes and Non Civil Parished Areas",
+      str_detect(service, "/Parishes") ~ "Parishes",
+      str_detect(service, "/Regions") ~ "Regions",
+      str_detect(service, "/Upper_Tier") ~ "Upper Tier",
+      str_detect(service, "/Wards") ~ "Wards",
+      str_detect(service, "/Lower_Layer") ~ "Lower Layer Output Areas",
+      str_detect(service, "/Middle_Layer") ~ "Middle Layer Output Areas",
+      str_detect(service, "/Output_Areas") ~ "Output Areas",
+    ),
+    boundary = as.factor(boundary)
+  ) |>
+  mutate(
+    boundary_short = case_when(
       str_detect(service, "Combined_Authorities") ~ "CAUTH",
       str_detect(service, "/Counties_and_Unitary_Authorities") ~ "CTYUA",
       str_detect(service, "/Counties_") ~ "CTY",
@@ -49,11 +70,11 @@ ons_data <- as.data.frame(services) |>
       str_detect(service, "/Middle_Layer") ~ "MSOA",
       str_detect(service, "/Output_Areas") ~ "OA",
     ),
-    boundary = as.factor(boundary)
+    boundary_short = as.factor(boundary_short)
   ) |>
   mutate(
     boundary_type = case_when(
-      boundary %in% c(
+      boundary_short %in% c(
         "CAUTH", "CTYUA", "CTY", "CTRY", "CED", "LAD",
         "LPA", "MCTY", "PARNCP", "PAR", "RGN", "UTLA", "WD"
       ) ~
@@ -90,7 +111,7 @@ ons_boundaries <- ons_data |>
   # Create URL to query featureserver and return a geojson file.
   mutate(url_download = paste0(service, "/0/query?where=1%3D1&outFields=*&outSR=4326&f=json")) |>
   # Create unique id
-  mutate(id = paste(boundary, year, detail_level, sep = "_")) |>
+  mutate(id = paste(boundary_short, year, detail_level, sep = "_")) |>
   relocate(id)
 
 usethis::use_data(ons_boundaries, overwrite = TRUE)

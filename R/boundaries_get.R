@@ -3,8 +3,8 @@
 #' Queries [ONS' Geoportal](https://geoportal.statistics.gov.uk/) endpoints and
 #' retrieves the requested geographical boundaries in the form of a sf object.
 #'
-#' @param boundary a string containing the name of the boundary to be
-#' downloaded. Accepted values are: `r levels(ons_boundaries$boundary)`
+#' @param boundary a string containing the acronym of name of the boundary to be
+#' downloaded. Accepted values are: `r levels(ons_boundaries$boundary_short)`
 #' @param year a number containing the year when the boundary was created.
 #' @param detail_level a string defining the level of detail in the geometry.
 #' (this affects the download size).
@@ -46,11 +46,11 @@ boundaries_get <- function(boundary, year = NULL, detail_level = "BUC") {
       class = "error_not_single_string"
     )
   }
-  if (!boundary %in% levels(ons_boundaries$boundary)) {
+  if (!boundary %in% levels(ons_boundaries$boundary_short)) {
     cli::cli_abort(
       paste(
         "`boundary` must be one of these values:",
-        levels(ons_boundaries$boundary)
+        levels(ons_boundaries$boundary_short)
       ),
       class = "error_boundary_not_valid"
     )

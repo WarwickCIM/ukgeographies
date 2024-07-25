@@ -7,7 +7,7 @@
 boundaries_get(boundary, year = NULL, detail_level = "BUC")
 }
 \arguments{
-\item{boundary}{a string containing the name of the boundary to be
+\item{boundary}{a string containing the acronym of name of the boundary to be
 downloaded. Accepted values are: CAUTH, CED, CTRY, CTY, CTYUA, LAD, LPA, LSOA, MCTY, MSOA, OA, PAR, PARNCP, RGN, UTLA, WD}
 
 \item{year}{a number containing the year when the boundary was created.}

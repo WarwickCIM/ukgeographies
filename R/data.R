@@ -14,9 +14,10 @@
 #' \describe{
 #'   \item{id}{A unique identifier for every boundary}
 #'   \item{service}{URL pointing to the API service}
-#'   \item{boundary_type}{Type of boundary, according to ONS' classification}
-#'   \item{boundary}{Boundary (short) name, according to ONS' naming}
-#'   \item{detail_level}{Boundary's level of detail. For a detailed description of the methodology refer to [Digital boundaries](https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries) }
+#'   \item{boundary_type}{Type of boundary, according to ONS' classification: `r levels(ons_boundaries$boundary_type)`}
+#'   \item{boundary}{Boundary name, according to ONS' naming: `r levels(ons_boundaries$boundary)`}
+#'   \item{boundary_short}{Boundary (short) name, according to ONS' naming: `r levels(ons_boundaries$boundary_short)`}
+#'   \item{detail_level}{Boundary's level of detail: `r levels(ons_boundaries$detail_level)`. For a detailed description of the methodology refer to [Digital boundaries](https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries) }
 #'   \item{year}{Year in which the boundaries were created}
 #'   \item{url_download}{URL querying the API service to return all features as a geojson file}
 #'

@@ -1,9 +1,11 @@
 #' Interactively Retrieve Geographical Boundaries
 #'
-#' Constructs a valid combination of geometry type, year and detail level and
-#' downloads the selected boundary.
+#' A Command Line Interface that constructs a valid combination of geometry
+#' type, year and detail level and downloads the selected boundary by calling
+#' `boundaries_get()`.
 #'
-#' @return  a `sf` object with the selected boundaries.
+#' @return  a `sf` object with the selected combination of boundary, year and
+#' detail level.
 #'
 #'
 #' @export
@@ -36,6 +38,12 @@ boundaries_select <- function() {
 
   cat("You chose:", choice_boundary, "\n")
 
+  boundaries_lookup <- unique(ons_boundaries[c("boundary", "boundary_short")])
+
+  choice_boundary_short <- as.character(
+    boundaries_lookup$boundary_short[boundaries_lookup$boundary == choice_boundary])
+
+
   # Year --------------------------------------------------------------------
 
   years <- levels(as.factor(
@@ -56,16 +64,28 @@ boundaries_select <- function() {
     ons_boundaries[ons_boundaries$boundary == choice_boundary & ons_boundaries$year == choice_year, "detail_level"]
   ))
 
-  choice_detail_levels_n <- utils::menu(
-    detail_levels,
-    title = "Choose the detail level you'd like to download"
-  )
+  # Some combinations do not have any specified detail level
+  if (nlevels(detail_levels) > 1) {
 
-  choice_detail_levels <- detail_levels[choice_detail_levels_n]
+    choice_detail_levels_n <- utils::menu(
+      detail_levels,
+      title = "Choose the detail level you'd like to download"
+    )
+
+    choice_detail_levels <- detail_levels[choice_detail_levels_n]
+
+  } else {
+
+    cli::cli_alert_info("This combination only has a single detail level
+                        available. Assigning it automatically")
+    choice_detail_levels <- "NA"
+  }
+
+
 
   # Download ---------------------------------------------------------------
   #return(paste(choice_boundary, choice_year, choice_detail_levels, sep = "_"))
-  return(boundaries_get(choice_boundary, choice_year, choice_detail_levels))
+  return(boundaries_get(choice_boundary_short, choice_year, choice_detail_levels))
 
   # Check if the user made a valid choice
   # if (choice_boundary_type> 0) {

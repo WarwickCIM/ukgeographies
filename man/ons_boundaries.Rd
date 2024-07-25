@@ -5,14 +5,15 @@
 \alias{ons_boundaries}
 \title{ONS Boundaries Metadata}
 \format{
-A data frame with 513 rows and 7
+A data frame with 524 rows and 8
 columns:
 \describe{
 \item{id}{A unique identifier for every boundary}
 \item{service}{URL pointing to the API service}
-\item{boundary_type}{Type of boundary, according to ONS' classification}
-\item{boundary}{Boundary (short) name, according to ONS' naming}
-\item{detail_level}{Boundary's level of detail. For a detailed description of the methodology refer to \href{https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries}{Digital boundaries} }
+\item{boundary_type}{Type of boundary, according to ONS' classification: Administrative}
+\item{boundary}{Boundary name, according to ONS' naming: Combined Authorities, Counties, Counties and Unitary Authorities, Countries, County Electoral Division, Local Authority Districts, Local Planning Authorities, Lower Layer Output Areas, Metropolitan Counties, Middle Layer Output Areas, Output Areas, Parishes, Parishes and Non Civil Parished Areas, Regions, Upper Tier, Wards}
+\item{boundary_short}{Boundary (short) name, according to ONS' naming: CAUTH, CED, CTRY, CTY, CTYUA, LAD, LPA, LSOA, MCTY, MSOA, OA, PAR, PARNCP, RGN, UTLA, WD}
+\item{detail_level}{Boundary's level of detail: BFC, BFE, BGC, BUC. For a detailed description of the methodology refer to \href{https://www.ons.gov.uk/methodology/geography/geographicalproducts/digitalboundaries}{Digital boundaries} }
 \item{year}{Year in which the boundaries were created}
 \item{url_download}{URL querying the API service to return all features as a geojson file}
 

@@ -7,9 +7,11 @@
 boundaries_select()
 }
 \value{
-a \code{sf} object with the selected boundaries.
+a \code{sf} object with the selected combination of boundary, year and
+detail level.
 }
 \description{
-Constructs a valid combination of geometry type, year and detail level and
-downloads the selected boundary.
+A Command Line Interface that constructs a valid combination of geometry
+type, year and detail level and downloads the selected boundary by calling
+\code{boundaries_get()}.
 }
