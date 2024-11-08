@@ -70,20 +70,27 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"WarwickCIM/ukgeographies"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="getting-geographical-boundaries">Getting geographical boundaries<a class="anchor" aria-label="anchor" href="#getting-geographical-boundaries"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p>So far, this package provides two functions to download a selected boundary from ONS geoportal and convert it into a <code>sf</code> object: <code><a href="reference/boundaries_get.html">boundaries_get()</a></code> and <code><a href="reference/boundaries_select.html">boundaries_select()</a></code></p>
+<p><code><a href="reference/boundaries_get.html">boundaries_get()</a></code> will construct the API query to download the desired boundary based on the parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://warwickcim.github.io/ukgeographies/">ukgeographies</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get a sf object from </span></span>
 <span><span class="va">countries_2023</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/boundaries_get.html">boundaries_get</a></span><span class="op">(</span><span class="st">"CTRY"</span>, <span class="fl">2023</span>, <span class="st">"BUC"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ℹ Querying ONS API</span></span>
+<span><span class="co">#&gt; ✔ Querying ONS API [48ms]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ⠙ Downloading the selected dataset from ONS services</span></span>
 <span><span class="co">#&gt; Warning in CPL_read_ogr(dsn, layer, query, as.character(options), quiet, : GDAL</span></span>
 <span><span class="co">#&gt; Message 1: organizePolygons() received a polygon with more than 100 parts. The</span></span>
 <span><span class="co">#&gt; processing may be really slow.  You can skip the processing by setting</span></span>
 <span><span class="co">#&gt; METHOD=SKIP, or only make it analyze counter-clock wise parts by setting</span></span>
 <span><span class="co">#&gt; METHOD=ONLY_CCW if you can assume that the outline of holes is counter-clock</span></span>
-<span><span class="co">#&gt; wise defined</span></span></code></pre></div>
+<span><span class="co">#&gt; wise defined</span></span>
+<span><span class="co">#&gt; ✔ Downloading the selected dataset from ONS services [3.2s]</span></span>
+<span><span class="co">#&gt; </span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">)</span></span>
@@ -97,39 +104,41 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <span><span class="co">#&gt; Bounding box:  xmin: -8.649996 ymin: 49.88234 xmax: 1.763706 ymax: 60.86087</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 12</span></span>
-<span><span class="co">#&gt;     FID CTRY23CD  CTRY23NM       CTRY23NMW  BNG_E  BNG_N LONG  LAT   Shape__Area</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     1 E92000001 England        Lloegr    394883 370883 -2.0… 53.2…     1.31e11</span></span>
-<span><span class="co">#&gt; 2     2 N92000002 Northern Irel… Gogledd …  86544 535337 -6.8… 54.6…     1.43e10</span></span>
-<span><span class="co">#&gt; 3     3 S92000003 Scotland       Yr Alban  277744 700060 -3.9… 56.1…     7.86e10</span></span>
-<span><span class="co">#&gt; 4     4 W92000004 Wales          Cymru     263405 242881 -3.9… 52.0…     2.08e10</span></span>
+<span><span class="co">#&gt;     FID CTRY23CD  CTRY23NM       CTRY23NMW  BNG_E  BNG_N  LONG   LAT Shape__Area</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1     1 E92000001 England        Lloegr    394883 370883 -2.08  53.2     1.31e11</span></span>
+<span><span class="co">#&gt; 2     2 N92000002 Northern Irel… Gogledd …  86544 535337 -6.86  54.6     1.43e10</span></span>
+<span><span class="co">#&gt; 3     3 S92000003 Scotland       Yr Alban  277744 700060 -3.97  56.2     7.86e10</span></span>
+<span><span class="co">#&gt; 4     4 W92000004 Wales          Cymru     263405 242881 -3.99  52.1     2.08e10</span></span>
 <span><span class="co">#&gt; # ℹ 3 more variables: Shape__Length &lt;dbl&gt;, GlobalID &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [°]&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">[</span><span class="st">"CTRY23NM"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
+<p>Because not every boundary is available for every year or detail level, some combination of parameters may yield invalid queries. To address that issue, <code><a href="reference/boundaries_select.html">boundaries_select()</a></code> provides an interface that exposes the available options based on the previous selection, so the combination will always be valid.</p>
+<p><video src="vignettes/media/boundaries_select_demo.webm" controls=""><a href="vignettes/media/boundaries_select_demo.webm">Video</a></video></p>
 </div>
 <div class="section level2">
 <h2 id="boundaries">Boundaries<a class="anchor" aria-label="anchor" href="#boundaries"></a>
 </h2>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; S'està adjuntant el paquet: 'dplyr'</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; Els següents objectes estan emmascarats des de 'package:stats':</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Els següents objectes estan emmascarats des de 'package:base':</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="6%">
-<col width="3%">
-<col width="16%">
-<col width="20%">
 <col width="14%">
 <col width="14%">
-<col width="26%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
+<col width="14%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">boundary_type</th>
@@ -143,7 +152,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <tbody>
 <tr class="odd">
 <td align="left">Administrative</td>
-<td align="left">CAUTH</td>
+<td align="left">Combined Authorities</td>
 <td align="left">2020; 2021; 2022; 2023</td>
 <td align="left">2020; 2021; 2022; 2023</td>
 <td align="left">2021; 2022; 2023</td>
@@ -152,25 +161,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="even">
 <td align="left">Administrative</td>
-<td align="left">CED</td>
-<td align="left">2023</td>
-<td align="left">2023</td>
-<td align="left">2023</td>
-<td align="left">2023</td>
-<td align="left">2017; 2018; 2019; 2020</td>
-</tr>
-<tr class="odd">
-<td align="left">Administrative</td>
-<td align="left">CTRY</td>
-<td align="left">1961; 2016; 2020; 2021; 2022; 2023</td>
-<td align="left">2016; 2020; 2021; 2022; 2023</td>
-<td align="left">2016; 2020; 2021; 2022; 2023</td>
-<td align="left">2016; 2020; 2021; 2022; 2023</td>
-<td align="left">2011; 2016; 2017; 2018; 2019; 2020; 2023</td>
-</tr>
-<tr class="even">
-<td align="left">Administrative</td>
-<td align="left">CTY</td>
+<td align="left">Counties</td>
 <td align="left">1961; 2020; 2021; 2022; 2023</td>
 <td align="left">2019; 2020; 2021; 2022; 2023</td>
 <td align="left">2020; 2021; 2022; 2023</td>
@@ -179,7 +170,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="odd">
 <td align="left">Administrative</td>
-<td align="left">CTYUA</td>
+<td align="left">Counties and Unitary Authorities</td>
 <td align="left">2017; 2019; 2020; 2021; 2022; 2023</td>
 <td align="left">2017; 2021; 2022; 2023</td>
 <td align="left">2020; 2021; 2022; 2023</td>
@@ -188,16 +179,34 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="even">
 <td align="left">Administrative</td>
-<td align="left">LAD</td>
-<td align="left">2008; 2011; 2016; 2017; 2019; 2021; 2022; 2023</td>
-<td align="left">2008; 2011; 2012; 2013; 2014; 2016; 2019; 2021; 2022; 2023</td>
-<td align="left">2008; 2011; 2017; 2019; 2021; 2022; 2023</td>
-<td align="left">2016; 2017; 2019; 2020; 2021; 2022; 2023</td>
-<td align="left">2011; 2016; 2017; 2018; 2019; 2022; 2023</td>
+<td align="left">Countries</td>
+<td align="left">1961; 2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2016; 2020; 2021; 2022; 2023</td>
+<td align="left">2011; 2016; 2017; 2018; 2019; 2020; 2023</td>
 </tr>
 <tr class="odd">
 <td align="left">Administrative</td>
-<td align="left">LPA</td>
+<td align="left">County Electoral Division</td>
+<td align="left">2023</td>
+<td align="left">2023</td>
+<td align="left">2023</td>
+<td align="left">2023</td>
+<td align="left">2017; 2018; 2019; 2020</td>
+</tr>
+<tr class="even">
+<td align="left">Administrative</td>
+<td align="left">Local Authority Districts</td>
+<td align="left">2008; 2011; 2016; 2017; 2019; 2021; 2022; 2023; 2024</td>
+<td align="left">2008; 2011; 2012; 2013; 2014; 2016; 2019; 2021; 2022; 2023; 2024</td>
+<td align="left">2008; 2011; 2017; 2019; 2021; 2022; 2023; 2024</td>
+<td align="left">2016; 2017; 2019; 2020; 2021; 2022; 2023; 2024</td>
+<td align="left">2011; 2016; 2017; 2018; 2019; 2022; 2023; 2024</td>
+</tr>
+<tr class="odd">
+<td align="left">Administrative</td>
+<td align="left">Local Planning Authorities</td>
 <td align="left">2019; 2020; 2021; 2022; 2023</td>
 <td align="left">2019; 2020; 2021; 2022; 2023</td>
 <td align="left">2019; 2020; 2021; 2022; 2023</td>
@@ -206,7 +215,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="even">
 <td align="left">Administrative</td>
-<td align="left">MCTY</td>
+<td align="left">Metropolitan Counties</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
@@ -215,7 +224,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="odd">
 <td align="left">Administrative</td>
-<td align="left">PAR</td>
+<td align="left">Parishes</td>
 <td align="left">2020; 2021; 2022; 2023</td>
 <td align="left">2019; 2020; 2021; 2022; 2023</td>
 <td align="left">2020; 2021; 2022; 2023</td>
@@ -224,7 +233,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="even">
 <td align="left">Administrative</td>
-<td align="left">PARNCP</td>
+<td align="left">Parishes and Non Civil Parished Areas</td>
 <td align="left">2020; 2021; 2022; 2023</td>
 <td align="left">2020; 2022; 2023</td>
 <td align="left">2020; 2021; 2022; 2023</td>
@@ -233,7 +242,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="odd">
 <td align="left">Administrative</td>
-<td align="left">RGN</td>
+<td align="left">Regions</td>
 <td align="left">2020; 2021; 2022; 2023</td>
 <td align="left">2020; 2021; 2022; 2023</td>
 <td align="left">2020; 2021; 2022; 2023</td>
@@ -242,7 +251,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="even">
 <td align="left">Administrative</td>
-<td align="left">UTLA</td>
+<td align="left">Upper Tier</td>
 <td align="left">2022</td>
 <td align="left">2022</td>
 <td align="left">2022</td>
@@ -251,16 +260,16 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </tr>
 <tr class="odd">
 <td align="left">Administrative</td>
-<td align="left">WD</td>
+<td align="left">Wards</td>
 <td align="left">2019; 2020; 2021; 2022; 2023</td>
 <td align="left">1998; 2016; 2019; 2020; 2021; 2022; 2023; 2024</td>
-<td align="left">2019; 2020; 2021; 2022; 2023</td>
+<td align="left">2019; 2020; 2021; 2022; 2023; 2024</td>
 <td align="left">NA</td>
 <td align="left">1991; 1998; 2011; 2015; 2016; 2017; 2018; 2019; 2020; 2021; 2022; 2023; 2024</td>
 </tr>
 <tr class="even">
-<td align="left">Census Boundaries</td>
-<td align="left">LSOA</td>
+<td align="left">NA</td>
+<td align="left">Lower Layer Output Areas</td>
 <td align="left">NA</td>
 <td align="left">2011</td>
 <td align="left">2001</td>
@@ -268,8 +277,8 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left">Census Boundaries</td>
-<td align="left">MSOA</td>
+<td align="left">NA</td>
+<td align="left">Middle Layer Output Areas</td>
 <td align="left">NA</td>
 <td align="left">2001; 2011</td>
 <td align="left">2001</td>
@@ -277,8 +286,8 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="left">Census Boundaries</td>
-<td align="left">OA</td>
+<td align="left">NA</td>
+<td align="left">Output Areas</td>
 <td align="left">2001; 2011; 2021</td>
 <td align="left">2001; 2021</td>
 <td align="left">2001; 2011; 2021</td>
@@ -339,7 +348,7 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
