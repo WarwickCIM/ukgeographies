@@ -45,9 +45,11 @@ You can install the development version of ukgeographies from
 devtools::install_github("WarwickCIM/ukgeographies")
 ```
 
-## Example
+## Getting geographical boundaries
 
-This is a basic example which shows you how to solve a common problem:
+So far, this package provides two functions to download a selected boundary from ONS geoportal and convert it into a `sf` object: `boundaries_get()` and `boundaries_select()`
+
+`boundaries_get()` will construct the API query to download the desired boundary based on the parameters.
 
 ```{r example}
 library(ukgeographies)
@@ -61,6 +63,11 @@ countries_2023
 
 plot(countries_2023["CTRY23NM"])
 ```
+
+
+Because not every boundary is available for every year or detail level, some combination of parameters may yield invalid queries. To address that issue, `boundaries_select()` provides an interface that exposes the available options based on the previous selection, so the combination will always be valid.
+
+![](vignettes/media/boundaries_select_demo.webm)
 
 
 ## Boundaries
