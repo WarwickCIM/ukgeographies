@@ -49,7 +49,7 @@ devtools::install_github("WarwickCIM/ukgeographies")
 
 So far, this package provides two functions to download a selected boundary from ONS geoportal and convert it into a `sf` object: `boundaries_get()` and `boundaries_select()`
 
-`boundaries_get()` will construct the API query to download the desired boundary based on the parameters.
+`boundaries_get()` will construct the API query to download the desired boundary based on the combination of three parameters (Boundary type, Date and Detail Level).
 
 ```{r example}
 library(ukgeographies)
@@ -67,7 +67,7 @@ plot(countries_2023["CTRY23NM"])
 
 Because not every boundary is available for every year or detail level, some combination of parameters may yield invalid queries. To address that issue, `boundaries_select()` provides an interface that exposes the available options based on the previous selection, so the combination will always be valid.
 
-![](vignettes/media/boundaries_select_demo.webm)
+![](vignettes/media/boundaries_select_demo.gif)
 
 
 ## Boundaries
