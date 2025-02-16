@@ -8,8 +8,8 @@
 <title>Downloads UK Geographies From ONS' Geoportal • ukgeographies</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Downloads UK Geographies From ONS' Geoportal">
 <meta name="description" content="What the package does (one paragraph).">
 <meta property="og:description" content="What the package does (one paragraph).">
@@ -73,14 +73,14 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <h2 id="getting-geographical-boundaries">Getting geographical boundaries<a class="anchor" aria-label="anchor" href="#getting-geographical-boundaries"></a>
 </h2>
 <p>So far, this package provides two functions to download a selected boundary from ONS geoportal and convert it into a <code>sf</code> object: <code><a href="reference/boundaries_get.html">boundaries_get()</a></code> and <code><a href="reference/boundaries_select.html">boundaries_select()</a></code></p>
-<p><code><a href="reference/boundaries_get.html">boundaries_get()</a></code> will construct the API query to download the desired boundary based on the parameters.</p>
+<p><code><a href="reference/boundaries_get.html">boundaries_get()</a></code> will construct the API query to download the desired boundary based on the combination of three parameters (Boundary type, Date and Detail Level).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://warwickcim.github.io/ukgeographies/">ukgeographies</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get a sf object from </span></span>
 <span><span class="va">countries_2023</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/boundaries_get.html">boundaries_get</a></span><span class="op">(</span><span class="st">"CTRY"</span>, <span class="fl">2023</span>, <span class="st">"BUC"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Querying ONS API</span></span>
-<span><span class="co">#&gt; ✔ Querying ONS API [48ms]</span></span>
+<span><span class="co">#&gt; ✔ Querying ONS API [40ms]</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Downloading the selected dataset from ONS services</span></span>
 <span><span class="co">#&gt; Warning in CPL_read_ogr(dsn, layer, query, as.character(options), quiet, : GDAL</span></span>
@@ -89,14 +89,12 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <span><span class="co">#&gt; METHOD=SKIP, or only make it analyze counter-clock wise parts by setting</span></span>
 <span><span class="co">#&gt; METHOD=ONLY_CCW if you can assume that the outline of holes is counter-clock</span></span>
 <span><span class="co">#&gt; wise defined</span></span>
-<span><span class="co">#&gt; ✔ Downloading the selected dataset from ONS services [3.2s]</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; ✔ Downloading the selected dataset from ONS services [1.5s]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "sf"         "tbl_df"     "tbl"        "data.frame"</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; [1] "sf"         "tbl_df"     "tbl"        "data.frame"</span></span>
+<span></span>
 <span><span class="va">countries_2023</span></span>
 <span><span class="co">#&gt; Simple feature collection with 4 features and 11 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -111,34 +109,33 @@ This package is highly experimental and is still a WIP. Expect uncomplete featur
 <span><span class="co">#&gt; 3     3 S92000003 Scotland       Yr Alban  277744 700060 -3.97  56.2     7.86e10</span></span>
 <span><span class="co">#&gt; 4     4 W92000004 Wales          Cymru     263405 242881 -3.99  52.1     2.08e10</span></span>
 <span><span class="co">#&gt; # ℹ 3 more variables: Shape__Length &lt;dbl&gt;, GlobalID &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [°]&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [°]&gt;</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">[</span><span class="st">"CTRY23NM"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
 <p>Because not every boundary is available for every year or detail level, some combination of parameters may yield invalid queries. To address that issue, <code><a href="reference/boundaries_select.html">boundaries_select()</a></code> provides an interface that exposes the available options based on the previous selection, so the combination will always be valid.</p>
-<p><video src="vignettes/media/boundaries_select_demo.webm" controls=""><a href="vignettes/media/boundaries_select_demo.webm">Video</a></video></p>
+<p><img src="articles/media/boundaries_select_demo.gif"></p>
 </div>
 <div class="section level2">
 <h2 id="boundaries">Boundaries<a class="anchor" aria-label="anchor" href="#boundaries"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; S'està adjuntant el paquet: 'dplyr'</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; Els següents objectes estan emmascarats des de 'package:stats':</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Els següents objectes estan emmascarats des de 'package:base':</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
-<table style="width:100%;" class="table">
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt;     filter, lag</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<table class="table">
 <colgroup>
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="14%">
+<col width="4%">
+<col width="11%">
+<col width="15%">
+<col width="18%">
+<col width="13%">
+<col width="13%">
+<col width="22%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">boundary_type</th>
