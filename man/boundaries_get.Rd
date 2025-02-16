@@ -37,8 +37,8 @@ Queries \href{https://geoportal.statistics.gov.uk/}{ONS' Geoportal} endpoints an
 retrieves the requested geographical boundaries in the form of a sf object.
 }
 \examples{
-CA_2023_BGC <- boundaries_get("CAUTH", 2023, "BGC")
+countries_2023 <- boundaries_get("CTRY", 2023, "BUC")
 
-class(CA_2023_BGC)
+class(countries_2023)
 
 }

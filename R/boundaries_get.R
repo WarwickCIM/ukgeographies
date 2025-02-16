@@ -29,9 +29,9 @@
 #' @export
 #'
 #' @examples
-#' CA_2023_BGC <- boundaries_get("CAUTH", 2023, "BGC")
+#' countries_2023 <- boundaries_get("CTRY", 2023, "BUC")
 #'
-#' class(CA_2023_BGC)
+#' class(countries_2023)
 #'
 boundaries_get <- function(boundary, year = NULL, detail_level = "BUC") {
   # Check parameters --------------------------------------------------------
