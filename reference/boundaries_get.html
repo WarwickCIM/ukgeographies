@@ -80,17 +80,17 @@ corresponds to:</p><ul><li><p><em>Full Extent (BFE)</em> – Full resolution bou
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">CA_2023_BGC</span> <span class="op">&lt;-</span> <span class="fu">boundaries_get</span><span class="op">(</span><span class="st">"CAUTH"</span>, <span class="fl">2023</span>, <span class="st">"BGC"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">countries_2023</span> <span class="op">&lt;-</span> <span class="fu">boundaries_get</span><span class="op">(</span><span class="st">"CTRY"</span>, <span class="fl">2023</span>, <span class="st">"BUC"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Querying ONS API</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Querying ONS API <span style="color: #B2B2B2;">[8ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Downloading the selected dataset from ONS services</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (nchar(dsn) &lt; 1) stop("`dsn` must point to a source, not an empty string.",     call. = FALSE):</span> the condition has length &gt; 1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Downloading the selected dataset from ONS services <span style="color: #B2B2B2;">[350ms]</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>GDAL Message 1: organizePolygons() received a polygon with more than 100 parts. The processing may be really slow.  You can skip the processing by setting METHOD=SKIP, or only make it analyze counter-clock wise parts by setting METHOD=ONLY_CCW if you can assume that the outline of holes is counter-clock wise defined</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Downloading the selected dataset from ONS services <span style="color: #B2B2B2;">[1.2s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">CA_2023_BGC</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'CA_2023_BGC' not found</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">countries_2023</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sf"         "tbl_df"     "tbl"        "data.frame"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
