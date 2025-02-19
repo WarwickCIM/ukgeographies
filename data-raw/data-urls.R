@@ -29,6 +29,7 @@ ons_data <- as.data.frame(services) |>
   filter(str_detect(service, "/FeatureServer")) |>
   # Convert absolute URLS
   mutate(service = paste0(geoportal_base_url, service)) |>
+  mutate(url_metadata = paste0(service, "/info/metadata")) |> 
   # Infer categories from titles
   mutate(
     boundary = case_when(
