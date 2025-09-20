@@ -8,13 +8,13 @@ boundaries_get(boundary, year = NULL, detail_level = "BUC")
 }
 \arguments{
 \item{boundary}{a string containing the acronym of name of the boundary to be
-downloaded. Accepted values are: CAUTH, CED, CTRY, CTY, CTYUA, LAD, LPA, LSOA, MCTY, MSOA, OA, PAR, PARNCP, RGN, UTLA, WD}
+downloaded. Accepted values are: CAUTH, CED, CTRY, CTY, CTYUA, LAD, LPA, LSOA, MCTY, MSOA, NHS, OA, PAR, PARNCP, RGN, UTLA, WD}
 
 \item{year}{a number containing the year when the boundary was created.}
 
 \item{detail_level}{a string defining the level of detail in the geometry.
 (this affects the download size).
-Accepted values are: BFC, BFE, BGC, BUC. Each value
+Accepted values are: BFC, BFE, BGC, BSC, BUC. Each value
 corresponds to:
 \itemize{
 \item \emph{Full Extent (BFE)} – Full resolution boundaries go to the Extent of the Realm (Low Water Mark) and are the most detailed of the boundaries.
